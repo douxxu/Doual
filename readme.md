@@ -25,7 +25,7 @@ To install DouAl, follow these steps:
 3. Install DouAl with npm:
 
 ```bash
-npm install -g DouAl
+npm install -g doual
 ```
 
 
