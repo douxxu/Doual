@@ -1,6 +1,6 @@
 {
   "name": "doual",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "DouAl - Alias management tool for Unix-like systems (MacOS, Linux)",
   "main": "DouAl.js",
   "scripts": {
