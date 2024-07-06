@@ -90,7 +90,7 @@ ll
 ### Creating an Alias
 
 ```bash
-dak create "ls -la" ll -a "--color=auto"
+dal create "ls -la" ll -a "--color=auto"
 ```
 
 Output:
