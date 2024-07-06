@@ -25,7 +25,7 @@ To install DouAl, follow these steps:
 3. Install DouAl with npm:
 
 ```bash
-npm install -g doual
+npm install -g DouAl
 ```
 
 
@@ -49,18 +49,18 @@ dal create <initial_command> <alias> [-a <arguments>] [-r <true|false>]
 dal create "ls -la" ll -a "--color=auto"
 ```
 
-### Delete an Alias
+### Remove an Alias
 
-You can delete an alias using the following command:
+You can remove an alias using the following command:
 
 ```bash
-dal delete <alias>
+dal remove <alias>
 ```
 
 **Example:**
 
 ```bash
-dal delete ll
+dal remove ll
 ```
 
 ### List All Aliases
@@ -106,7 +106,7 @@ Starting DouAl.js v1.0.0
 ### Deleting an Alias
 
 ```bash
-dal delete ll
+dal remove ll
 ```
 
 Output:
