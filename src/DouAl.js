@@ -3,20 +3,23 @@
 const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
-const colors = require('colors');
+require('colors');
 const readlineSync = require('readline-sync');
 
 const SCRIPT_NAME = path.basename(__filename);
 const ALIAS_FILE_PATH = path.join(process.env.HOME, '.doual_aliases');
 const SHELL_RC_FILES = {
     bash: '.bashrc',
-    zsh: '.zshrc'
+    zsh: '.zshrc',
+    fish: '.config/fish/config.fish'
 };
 
 const getShellRcFile = () => {
     const shell = process.env.SHELL || '';
     if (shell.includes('zsh')) {
         return SHELL_RC_FILES.zsh;
+    } else if (shell.includes('fish')) {
+        return SHELL_RC_FILES.fish;
     }
     return SHELL_RC_FILES.bash;
 };
@@ -27,7 +30,7 @@ const log = (message, type = 'info') => {
         success: '[✔]'.green,
         error: '[✘]'.red
     };
-    console.log(`${typeMap[type]} ${message}`);
+    console.log(`${typeMap[type]} ${message.grey}`);
 };
 
 const showHelp = () => {
@@ -67,7 +70,7 @@ const saveAlias = (command, alias, options) => {
     fs.writeFileSync(ALIAS_FILE_PATH, JSON.stringify(aliases));
 
     const rcFilePath = path.join(process.env.HOME, getShellRcFile());
-    const aliasCommand = `alias ${alias}='${command}${options.InitialArgs ? ` ${options.InitialArgs}` : ''}'\n`;
+    const aliasCommand = `alias ${alias}='${options.RunAsRoot ? 'sudo ' : ''}${command}${options.InitialArgs ? ` ${options.InitialArgs}` : ''}'\n`;
     fs.appendFileSync(rcFilePath, aliasCommand);
     log(`Alias ${alias} added to ${rcFilePath}`, 'success');
 
@@ -116,7 +119,7 @@ const executeAlias = aliasName => {
     if (alias.options.InitialArgs) {
         command += ` ${alias.options.InitialArgs}`;
     }
-    if (alias.options.RunAsRoot === true || alias.options.RunAsRoot === 'true' || alias.options.RunAsRoot === 1) {
+    if (alias.options.RunAsRoot) {
         command = `sudo ${command}`;
     }
     try {
@@ -161,7 +164,7 @@ const parseArgs = () => {
 
 const { command, options } = parseArgs();
 
-const packageJson = require('./package.json');
+const packageJson = require('../package.json');
 console.log(`Starting ${SCRIPT_NAME} v${packageJson.version}`.cyan);
 
 switch (command) {
@@ -179,7 +182,7 @@ switch (command) {
             showHelp();
             process.exit(1);
         }
-        log(`Do you want to remove the alias ${options.alias}? ([Y]/n): `, 'info');
+        log(`Do you want to remove the alias ${options.alias}? [${'Y'.green}${'/'.grey}${'n'.red}${']'.grey}${': '.grey} `, 'info');
         const confirm = readlineSync.question();
         if (confirm.toLowerCase() === 'y' || confirm === '') {
             log(`Removing alias ${options.alias}...`, 'info');
