@@ -136,3 +136,6 @@ Alias: ll, Command: ls -la, Options: {"InitialArgs":"","RunAsRoot":false}
 ## 📝 License
 
 This project is licensed under the MIT License.
+
+---
+Made with <3 by douxx
