@@ -1,0 +1,36 @@
+{
+  "pack": [
+    {
+      "command": "ip addr",
+      "alias": "i",
+      "options": {
+        "InitialArgs": "",
+        "RunAsRoot": false
+      }
+    },
+    {
+      "command": "ls -l",
+      "alias": "ll",
+      "options": {
+        "InitialArgs": "",
+        "RunAsRoot": false
+      }
+    },
+    {
+      "command": "git status",
+      "alias": "gs",
+      "options": {
+        "InitialArgs": "",
+        "RunAsRoot": false
+      }
+    },
+    {
+      "command": "docker ps",
+      "alias": "dps",
+      "options": {
+        "InitialArgs": "",
+        "RunAsRoot": false
+      }
+    }
+  ]
+}
